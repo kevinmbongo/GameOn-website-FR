@@ -160,22 +160,27 @@ main {
 }
 
 .bground {
-  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
-  top: 0;
   height: 100%;
   width: 100%;
   overflow: auto;
   background-color: rgba(26, 39, 156, 0.4);
+  top: -100%;
+  opacity: 0;
+  transition: top 0.4s, opacity 0.4s;
 }
-
+.bground.show {
+  top: 0;
+  opacity: 1;
+}
 .content {
   margin: 5% auto;
   width: 100%;
   max-width: 500px;
-  animation-name: modalopen;
+  transition: all;
+  animation: modalopen ease-in-out 0.8s;
   animation-duration: var(--modal-duration);
   background: #232323;
   border-radius: 10px;
@@ -190,6 +195,10 @@ main {
   margin: 15px auto;
 }
 
+.closemodal {
+  animation: modalclose ease-in-out;
+  animation-duration: var(--modal-duration);
+}
 label {
   font-family: var(--font-default);
   font-size: 17px;
@@ -407,7 +416,6 @@ input[data-error]::after {
   font-size: 16px;
 }
 .hero-section {
-  min-height: 93vh;
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -416,7 +424,10 @@ input[data-error]::after {
   margin-bottom: 10px;
 }
 .hero-content {
-  padding: 51px 67px;
+  padding: 50px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
   grid-column: span 4;
   background: #232323;
   color: #fff;
@@ -433,6 +444,7 @@ input[data-error]::after {
   right: -80px;
   top: 0;
 }
+
 .hero-content > * {
   position: relative;
   z-index: 1;
@@ -445,7 +457,6 @@ input[data-error]::after {
 .hero-text {
   width: 146%;
   font-weight: normal;
-  margin-top: 57px;
   padding: 0;
 }
 .btn-signup {
@@ -454,7 +465,7 @@ input[data-error]::after {
   font-size: 1.3rem;
   padding: 15px 23px;
   margin: 0;
-  margin-top: 59px;
+  max-width: 200px;
 }
 .hero-img {
   grid-column: span 8;
@@ -526,5 +537,16 @@ footer {
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes modalclose {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-150px);
+    display: none;
   }
 }
