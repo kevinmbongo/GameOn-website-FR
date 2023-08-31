@@ -40,7 +40,7 @@
             Vous aimez jouer ? Notre prochain évènement gaming est ouvert
             aux réservations... Places limitées !
           </p>
-          
+
           <button class="btn-signup modal-btn">
             je m'inscris
           </button>
@@ -63,9 +63,8 @@
               method="get"
               onsubmit="return validate();"
             >
-              <div
-                class="formData">
-                <label>Prénom</label><br>
+              <div id="prenom" class="formData">
+                <label for="first">Prénom</label><br>
                 <input
                   class="text-control"
                   type="text"
@@ -217,5 +216,6 @@
       </p>
     </footer>
     <script src="/scripts/modal.js"></script>
+    <script src="/scripts/validForm.js"></script>
   </body>
 </html>
