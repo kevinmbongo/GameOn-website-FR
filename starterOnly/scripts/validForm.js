@@ -18,9 +18,11 @@ function validInputValue(balise, message) {
   if (balise.value.length < 2) {
     balise.parentElement.setAttribute("data-error-visible", "true");
     balise.parentElement.setAttribute("data-error", message);
+    return false;
   } else {
     balise.parentElement.removeAttribute("data-error-visible");
     balise.parentElement.removeAttribute("data-error");
+    return true;
   }
 }
 
@@ -30,9 +32,11 @@ function validEmail(balise, message) {
   if (emailRegExp.test(balise.value)) {
     balise.parentElement.removeAttribute("data-error-visible");
     balise.parentElement.removeAttribute("data-error");
+    return true;
   } else {
     balise.parentElement.setAttribute("data-error-visible", "true");
     balise.parentElement.setAttribute("data-error", message);
+    return false;
   }
 }
 
@@ -53,9 +57,11 @@ function validDate(date, message) {
   if (dateRegExp.test(dateReverse)) {
     date.parentElement.removeAttribute("data-error-visible");
     date.parentElement.removeAttribute("data-error");
+    return true;
   } else {
     date.parentElement.setAttribute("data-error-visible", "true");
     date.parentElement.setAttribute("data-error", message);
+    return false;
   }
 }
 
@@ -63,9 +69,11 @@ function validQuantityValue(balise, message) {
   if (!balise.value) {
     balise.parentElement.setAttribute("data-error-visible", "true");
     balise.parentElement.setAttribute("data-error", message);
+    return false;
   } else {
     balise.parentElement.removeAttribute("data-error-visible");
     balise.parentElement.removeAttribute("data-error");
+    return true;
   }
 }
 
@@ -77,7 +85,6 @@ form.addEventListener("submit", (event) => {
   validEmail(email, emailMessage);
   validDate(date, dateMessage);
   validQuantityValue(quantity, quantityMessage);
-  console.log(quantity.value);
 });
 
 // check validity on change event

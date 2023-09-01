@@ -189,6 +189,44 @@ main {
   color: #fff;
   padding-top: 10px;
 }
+.content2 {
+  padding: 5%;
+  width: 100%;
+  max-width: 500px;
+  animation: successMessage ease-in-out 0.8s;
+  animation-duration: var(--modal-duration);
+  background: #232323;
+  border-radius: 10px;
+  overflow: hidden;
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  padding-top: 10px;
+  top: -100%;
+  opacity: 0;
+  z-index: 2;
+  transition: all 0.4s, opacity 0.4s;
+  visibility: hidden;
+}
+.content2.show {
+  top: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
+.success-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  height: 100%;
+}
+.success-message div {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
 
 .modal-body {
   padding: 15px 8%;
@@ -199,6 +237,12 @@ main {
   animation: modalclose ease-in-out;
   animation-duration: var(--modal-duration);
 }
+
+.close-success-message {
+  animation: ModalCloseSuccess ease-in-out;
+  animation-duration: var(--modal-duration);
+}
+
 label {
   font-family: var(--font-default);
   font-size: 17px;
@@ -484,7 +528,7 @@ input[data-error]::after {
   color: #fe142f;
   padding: 0;
   font-size: 1rem;
-  margin: 60px 0 30px;
+  margin: 30px 0;
   font-weight: bolder;
 }
 .hero-section > .btn-signup {
@@ -543,8 +587,28 @@ footer {
     opacity: 1;
   }
 }
+@keyframes successMessage {
+  from {
+    opacity: 0;
+    transform: translateY(-150px);
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 @keyframes modalclose {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-150px);
+    display: none;
+  }
+}
+
+@keyframes ModalCloseSuccess {
   from {
     opacity: 1;
   }
