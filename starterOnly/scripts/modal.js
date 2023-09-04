@@ -49,7 +49,9 @@ window.onclick = function (event) {
   }
 };
 
-// validate form
+//************************* validate form *****************************
+
+// error messages
 const firstMessage =
   "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
 const lastMessage =
@@ -57,13 +59,16 @@ const lastMessage =
 const emailMessage = "Veuillez entrer une adresse mail valide.";
 const dateMessage = "Vous devez entrer votre date de naissance.";
 const quantityMessage = "Vous devez entrer une réponse.";
+const conditionMessage = "Ce champ est obligatoire.";
 
+// Modal DOM Elements
 let form = document.querySelector("form");
 let first = document.getElementById("first");
 let last = document.getElementById("last");
 let email = document.getElementById("email");
 let date = document.getElementById("birthdate");
 let quantity = document.getElementById("quantity");
+let condition = document.getElementById("checkbox1");
 
 // check the validity of value
 function validInputValue(balise, message) {
@@ -116,9 +121,22 @@ function validDate(date, message) {
     return false;
   }
 }
-
+// check quantity validity
 function validQuantityValue(balise, message) {
   if (!balise.value) {
+    balise.parentElement.setAttribute("data-error-visible", "true");
+    balise.parentElement.setAttribute("data-error", message);
+    return false;
+  } else {
+    balise.parentElement.removeAttribute("data-error-visible");
+    balise.parentElement.removeAttribute("data-error");
+    return true;
+  }
+}
+
+// check quantity validity
+function validConditionChecked(balise, message) {
+  if (!balise.checked) {
     balise.parentElement.setAttribute("data-error-visible", "true");
     balise.parentElement.setAttribute("data-error", message);
     return false;
@@ -138,12 +156,12 @@ form.addEventListener("submit", (event) => {
     !validInputValue(last, lastMessage) ||
     !validEmail(email, emailMessage) ||
     !validDate(date, dateMessage) ||
-    !validQuantityValue(quantity, quantityMessage)
+    !validQuantityValue(quantity, quantityMessage) ||
+    !validConditionChecked(condition, conditionMessage)
   ) {
     return false;
   } else {
     launchSuccessMessage();
-    return true;
   }
 });
 
@@ -166,4 +184,8 @@ date.addEventListener("change", () => {
 
 quantity.addEventListener("change", () => {
   validQuantityValue(quantity, quantityMessage);
+});
+
+condition.addEventListener("change", () => {
+  validConditionChecked(condition, conditionMessage);
 });
