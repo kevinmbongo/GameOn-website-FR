@@ -101,17 +101,25 @@ function validEmail(balise, message) {
 function validDate(date, message) {
   let dateRegExp =
     /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  var yyyy = today.getFullYear();
+
+  today = yyyy + "-" + mm + "-" + dd;
+  console.log(today);
+  console.log(date.value);
 
   function reverseDate(dateStr) {
     const parts = dateStr.split("-");
     if (parts.length === 3) {
       return parts.reverse().join("-");
     }
-    return dateStr;
+    return parts;
   }
   const dateReverse = reverseDate(date.value);
 
-  if (dateRegExp.test(dateReverse)) {
+  if (dateRegExp.test(dateReverse) && date.value < today) {
     date.parentElement.removeAttribute("data-error-visible");
     date.parentElement.removeAttribute("data-error");
     return true;
@@ -121,6 +129,7 @@ function validDate(date, message) {
     return false;
   }
 }
+
 // check quantity validity
 function validQuantityValue(balise, message) {
   if (!balise.value) {
@@ -180,6 +189,7 @@ email.addEventListener("change", () => {
 
 date.addEventListener("change", () => {
   validDate(date, dateMessage);
+  console.log(date.value);
 });
 
 quantity.addEventListener("change", () => {

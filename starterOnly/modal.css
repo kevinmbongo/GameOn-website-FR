@@ -315,7 +315,7 @@ input[data-error]::after {
   display: block;
   width: 20px;
   height: 20px;
-  border: 2px solid;
+  border: 1px solid;
   border-radius: 50%;
   text-indent: 29px;
   white-space: nowrap;
