@@ -1,12 +1,3 @@
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
@@ -16,14 +7,15 @@ const btnSubmit = document.querySelector(".btn-submit");
 const successMessage = document.querySelector(".content2");
 const closeSuccessMessage = document.querySelectorAll(".close-success-message");
 
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
-
-closeSuccessMessage.forEach((btn) =>
-  btn.addEventListener("click", closeModalSuccessMessage)
-);
+// handle topnav responsive design
+function editNav() {
+  const x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
 
 // launch modal form
 function launchModal() {
@@ -49,7 +41,16 @@ window.onclick = function (event) {
   }
 };
 
-//************************* validate form *****************************
+// launch modal event
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
+
+closeSuccessMessage.forEach((btn) =>
+  btn.addEventListener("click", closeModalSuccessMessage)
+);
+
+//*********************** validate form ***************************
 
 // error messages
 const firstMessage =
@@ -62,13 +63,13 @@ const quantityMessage = "Vous devez entrer une réponse.";
 const conditionMessage = "Ce champ est obligatoire.";
 
 // Modal DOM Elements
-let form = document.querySelector("form");
-let first = document.getElementById("first");
-let last = document.getElementById("last");
-let email = document.getElementById("email");
-let date = document.getElementById("birthdate");
-let quantity = document.getElementById("quantity");
-let condition = document.getElementById("checkbox1");
+const form = document.querySelector("form");
+const first = document.getElementById("first");
+const last = document.getElementById("last");
+const email = document.getElementById("email");
+const date = document.getElementById("birthdate");
+const quantity = document.getElementById("quantity");
+const condition = document.getElementById("checkbox1");
 
 // check the validity of value
 function validInputValue(balise, message) {
@@ -101,14 +102,12 @@ function validEmail(balise, message) {
 function validDate(date, message) {
   let dateRegExp =
     /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, "0");
-  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-  var yyyy = today.getFullYear();
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, "0");
+  let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  let yyyy = today.getFullYear();
 
   today = yyyy + "-" + mm + "-" + dd;
-  console.log(today);
-  console.log(date.value);
 
   function reverseDate(dateStr) {
     const parts = dateStr.split("-");
@@ -143,8 +142,8 @@ function validQuantityValue(balise, message) {
   }
 }
 
-// check quantity validity
-function validConditionChecked(balise, message) {
+// check CGU consent
+function cguChecked(balise, message) {
   if (!balise.checked) {
     balise.parentElement.setAttribute("data-error-visible", "true");
     balise.parentElement.setAttribute("data-error", message);
@@ -166,7 +165,7 @@ form.addEventListener("submit", (event) => {
     !validEmail(email, emailMessage) ||
     !validDate(date, dateMessage) ||
     !validQuantityValue(quantity, quantityMessage) ||
-    !validConditionChecked(condition, conditionMessage)
+    !cguChecked(condition, conditionMessage)
   ) {
     return false;
   } else {
@@ -189,7 +188,6 @@ email.addEventListener("change", () => {
 
 date.addEventListener("change", () => {
   validDate(date, dateMessage);
-  console.log(date.value);
 });
 
 quantity.addEventListener("change", () => {
@@ -197,5 +195,5 @@ quantity.addEventListener("change", () => {
 });
 
 condition.addEventListener("change", () => {
-  validConditionChecked(condition, conditionMessage);
+  cguChecked(condition, conditionMessage);
 });
