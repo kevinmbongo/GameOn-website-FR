@@ -25,13 +25,14 @@ function launchModal() {
 function launchSuccessMessage() {
   successMessage.classList.add("show");
 }
-function closeModalSuccessMessage() {
-  successMessage.classList.remove("show");
-  closeModal();
-}
 // close modal form
 function closeModal() {
   modalbg.classList.remove("show");
+}
+
+function closeModalSuccessMessage() {
+  successMessage.classList.remove("show");
+  closeModal();
 }
 
 // close when click anywhere outside of the modal
